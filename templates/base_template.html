@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <body class="hold-transition sidebar-mini layout-fixed">
+    <!-- Wrapper -->
+    <div class="wrapper">
+        {% include 'snippets/navbar.html' %}
+        {% include 'snippets/sidebar.html' %}
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            {% block content %}
+                <!-- Web Context Here -->
+            {% endblock content %}
+        </div>
+        <!-- / Content Wrapper -->
+        {% include 'snippets/footer.html' %}
+    </div>
+    <!-- / Wrapper -->
+    </body>
+
+{% endblock main %}
