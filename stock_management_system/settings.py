@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b+0d9x5yf$sw4a8t^=6trqc0t26=pmt_fsp)9@53y#1(1yzp1g'
+SECRET_KEY = os.environ.get('SET_SECRET_KEY_SMS')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('SET_DEBUG_SMS')
 
 ALLOWED_HOSTS = []
 
@@ -37,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +57,7 @@ ROOT_URLCONF = 'stock_management_system.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,6 +70,8 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'accounts.User'
+
 WSGI_APPLICATION = 'stock_management_system.wsgi.application'
 
 
@@ -75,8 +80,12 @@ WSGI_APPLICATION = 'stock_management_system.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('SET_DB_NAME_SMS'),
+        'USER': os.environ.get('SET_DB_USER_SMS'),
+        'PASSWORD': os.environ.get('SET_DB_PASSWORD_SMS'),
+        'HOST': os.environ.get('SET_DB_HOST_SMS'),
+        'PORT':os.environ.get('SET_PORT_SMS'),
     }
 }
 
