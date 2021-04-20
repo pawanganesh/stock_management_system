@@ -73,3 +73,12 @@ def terms_view(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+
+
+def profile_view(request, username):
+    user_detail = User.objects.get(username=username)
+    context = {
+        'title': 'Profile',
+        'user_detail': user_detail,
+    }
+    return render(request, 'accounts/profile.html', context)

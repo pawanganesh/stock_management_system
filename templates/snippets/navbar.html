@@ -38,7 +38,7 @@
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <img src="https://cdn4.iconfinder.com/data/icons/man-6/48/man-03-512.png"
                      class="user-image img-circle elevation-2" alt="User Image">
-                <span class="d-none d-md-inline">Someone</span>
+                <span class="d-none d-md-inline">{{ request.user.get_full_name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
                 <!-- User image -->
@@ -46,15 +46,15 @@
                     <img src="https://cdn4.iconfinder.com/data/icons/man-6/48/man-03-512.png"
                          class="img-circle elevation-2" alt="User Image">
                     <p>
-                        Someone
-                        <small>Member since 08 Oct 1999</small>
+                        {{ request.user.get_full_name }}
+                        <small>{{ request.user.username }}</small>
                     </p>
                 </li>
                 <!-- / User image -->
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    <a href="#" class="btn btn-default btn-flat float-right">Sign out</a>
+                    <a href="/profile/{{ request.user.username }}/" class="btn btn-default btn-flat">Profile</a>
+                    <a href="{% url 'logout' %}" class="btn btn-default btn-flat float-right">Logout</a>
                 </li>
                 <!-- / Menu Footer-->
             </ul>

@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -71,6 +73,10 @@ TEMPLATES = [
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 WSGI_APPLICATION = 'stock_management_system.wsgi.application'
 

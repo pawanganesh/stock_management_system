@@ -77,5 +77,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+    def get_full_name(self):
+        full_name = '%s %s' % (self.first_name, self.last_name)
+        return full_name
+
 
 models.signals.pre_save.connect(set_username, sender=User)
