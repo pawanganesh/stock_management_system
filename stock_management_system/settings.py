@@ -16,18 +16,16 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SET_SECRET_KEY_SMS')
+SECRET_KEY = 'django-insecure-b+0d9x5yf$sw4a8t^=6trqc0t26=pmt_fsp)9@53y#1(1yzp1g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('SET_DEBUG_SMS')
+DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['pythonclusters-29081-0.cloudclusters.net', '127.0.0.1']
 
 # Application definition
 
@@ -40,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts',
+    'products',
+    'branches',
+    'suppliers',
     'debug_toolbar',
 ]
 
@@ -80,21 +81,19 @@ INTERNAL_IPS = [
 
 WSGI_APPLICATION = 'stock_management_system.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('SET_DB_NAME_SMS'),
         'USER': os.environ.get('SET_DB_USER_SMS'),
         'PASSWORD': os.environ.get('SET_DB_PASSWORD_SMS'),
         'HOST': os.environ.get('SET_DB_HOST_SMS'),
-        'PORT':os.environ.get('SET_PORT_SMS'),
+        'PORT': os.environ.get('SET_PORT_SMS'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -114,7 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -128,11 +126,15 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'project_staticfiles'), ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_cdn')
+
+MEDIA_URL = '/mediafiles/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles_cdn')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
